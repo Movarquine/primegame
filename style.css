@@ -1,0 +1,147 @@
+body {
+  background-image: url('https://cdn.midjourney.com/1d63701a-506b-43f9-96e1-4f9ebfa1ac4c/0_1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Patrick Hand', cursive;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* game */
+
+h1 {
+  text-align: center;
+  font-size: 125px;
+  font-style: italic;
+  margin-bottom: -65px;
+  margin-top: -15px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+}
+
+h2 {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: -15px;
+}
+
+p {
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: -50px;
+}
+
+#timer {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+#number {
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: -25px;
+}
+
+#result {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+button {
+  background-color: #20639B;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  cursor: pointer;
+  border-radius: 9px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #173F5F;
+}
+
+button:disabled {
+  background-color: #B7C0CA;
+  cursor: not-allowed;
+}
+
+button#start {
+  background-color: #0474BA;
+  margin-bottom: 0px;
+  font-size: 40px;
+}
+
+button#start:hover {
+  background-color: rgba(241, 119, 32, 0.6);
+}
+
+.life {
+  display: inline;
+  font-size: 24px;
+}
+
+#leaderboard {
+  display: none;
+}
+
+/* Leaderboard */
+#leaderboard h2 {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#leaderboard ul {
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  margin-left: -35px;
+}
+
+#leaderboard li {
+  list-style-type: none;
+  border-bottom: 1px solid #ccc;
+  justify-content: center;
+  align-items: center;
+}
+
+#leaderboard li:last-child {
+  border-bottom: none;
+}
+
+.game-active #game-title {
+    display: none;
+}
+
+.number-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 150px; /* Adjust the height as needed */
+  margin-bottom: 50px;
+}
