@@ -2,7 +2,7 @@ body {
   background-image: url('https://cdn.midjourney.com/1d63701a-506b-43f9-96e1-4f9ebfa1ac4c/0_1.png');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Ysabeau';
   background-color: #f0f0f0;
   color: #333;
   display: flex;
@@ -13,11 +13,11 @@ body {
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -29,10 +29,10 @@ body {
 h1 {
   text-align: center;
   font-size: 125px;
-  font-style: italic;
+  font-weight: normal;
   margin-bottom: -65px;
   margin-top: -15px;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
@@ -48,8 +48,8 @@ p {
 }
 
 #timer {
-  font-size: 50px;
-  font-weight: bold;
+  font-size: 45px;
+  font-weight: normal;
 }
 
 #number {
@@ -67,41 +67,38 @@ p {
 }
 
 button {
-  background-color: #20639B;
+  background-color: #144260;
   border: none;
   color: white;
   padding: 15px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-family: 'Ysabeau';
   font-size: 25px;
   cursor: pointer;
-  border-radius: 9px;
+  border-radius: 10px;
   transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: #173F5F;
-}
-
-button:disabled {
-  background-color: #B7C0CA;
-  cursor: not-allowed;
+  background-color: #91443DBF;
 }
 
 button#start {
-  background-color: #0474BA;
-  margin-bottom: 0px;
-  font-size: 40px;
+  background-color: #144260;
+  margin-bottom: 10px;
+  font-size: 50px;
 }
 
 button#start:hover {
-  background-color: rgba(241, 119, 32, 0.6);
+  background-color: #91443DBF;
 }
 
 .life {
   display: inline;
   font-size: 24px;
+  color: #8a1e24;
 }
 
 #leaderboard {
@@ -119,7 +116,7 @@ button#start:hover {
   list-style-type: none;
   justify-content: center;
   align-items: center;
-  margin-left: -35px;
+  margin-left: -30px;
 }
 
 #leaderboard li {
