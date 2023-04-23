@@ -1,6 +1,26 @@
 const startButton = document.getElementById('start');
 const livesContainer = document.getElementById('lives');
 const lives = document.getElementsByClassName('life');
+const secondsText = document.getElementById('seconds-text');
+
+const aboutButton = document.getElementById('about-button');
+const aboutContent = document.getElementById('about-content');
+
+aboutButton.addEventListener('click', (event) => {
+  event.stopPropagation();
+  aboutContent.classList.toggle('active');
+});
+
+aboutContent.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
+
+document.addEventListener('click', (event) => {
+  if (aboutContent.classList.contains('active')) {
+    aboutContent.classList.remove('active');
+  }
+});
+
 
 const backgroundMusic = new Audio('background_music.mp3');
 const correctSound = new Audio('correct_answer.mp3');
@@ -15,29 +35,29 @@ let timerInterval;
 function gameOver() {
     clearInterval(timerInterval);
     resultElement.innerHTML = `Game Over!<br>Level reached: ${level}`;
-    resultElement.classList.add('result-extra-margin'); // Add extra margin class
-    resultElement.classList.remove('result-initial-margin'); // Remove initial margin class
+    resultElement.classList.add('result-extra-margin');
+    resultElement.classList.remove('result-initial-margin');
     yesButton.style.display = 'none';
     noButton.style.display = 'none';
     numberElement.style.display = 'none';
     numberContainer.style.display = 'none';
 
- // Save the score to localStorage
-  const currentScore = level;
-  const storedScores = JSON.parse(localStorage.getItem('leaderboard')) || [];
-  storedScores.push({ score: currentScore, timestamp: new Date().toISOString() });
-  storedScores.sort((a, b) => b.score - a.score || new Date(b.timestamp) - new Date(a.timestamp));
-  localStorage.setItem('leaderboard', JSON.stringify(storedScores.slice(0, 10)));
+    // Scores to cache.
+    const currentScore = level;
+    const storedScores = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    storedScores.push({ score: currentScore, timestamp: new Date().toISOString() });
+    storedScores.sort((a, b) => b.score - a.score || new Date(b.timestamp) - new Date(a.timestamp));
+    localStorage.setItem('leaderboard', JSON.stringify(storedScores.slice(0, 10)));
 
-  yesButton.disabled = true;
-  noButton.disabled = true;
-  backgroundMusic.pause();
-  backgroundMusic.currentTime = 0;
-  warningBackgroundMusic.pause();
-  warningBackgroundMusic.currentTime = 0;
-  startButton.style.display = 'inline';
-  startButton.textContent = 'Again?';
-  leaderboard.style.display = 'block';
+    yesButton.disabled = true;
+    noButton.disabled = true;
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+    warningBackgroundMusic.pause();
+    warningBackgroundMusic.currentTime = 0;
+    startButton.style.display = 'inline';
+    startButton.textContent = 'Again?';
+    leaderboard.style.display = 'block';
 }
 
 const timerElement = document.getElementById('timer');
@@ -52,13 +72,13 @@ let level = 1;
 let correctAnswers = 0;
 
 function loseLife() {
-  livesRemaining--;
-  lives[livesRemaining].style.display = 'none';
-  if (livesRemaining <= 0) {
-    gameOver();
-    return true; // Indicate that the game is over
-  }
-  return false; // Indicate that the game is not over
+    livesRemaining--;
+    lives[livesRemaining].style.display = 'none';
+    if (livesRemaining <= 0) {
+        gameOver();
+        return true;
+    }
+    return false;
 }
 
 
@@ -103,7 +123,8 @@ function nextQuestion() {
     const generatedNumber = generateNumber();
     if (generatedNumber === -1) {
         level++;
-        resultElement.textContent = `Level ${level}!`;
+        resultElement.innerHTML = `Level ${level}<br>+10 seconds!`;
+        levelUpSound.currentTime = 0;
         levelUpSound.play();
         nextQuestion();
     } else {
@@ -117,18 +138,31 @@ function checkAnswer(answer) {
 
   if (isCorrect) {
     correctAnswers++;
+    correctSound.currentTime = 0;
     correctSound.play();
     if (correctAnswers === 3) {
-      level++;
-      correctAnswers = 0;
-      resultElement.textContent = `Level ${level}!`;
-      levelUpSound.play();
-    } else {
-      resultElement.textContent = 'Correct!';
+    level++;
+    timeRemaining += 10; // Add 10 seconds to the timer
+    if (timeRemaining > 20) {
+      timerElement.style.color = 'black';
+      secondsText.style.color = 'black';
+      warningBackgroundMusic.pause();
+      warningBackgroundMusic.currentTime = 0;
+
     }
+    correctAnswers = 0;
+    resultElement.innerHTML = `Level ${level}<br>+10 seconds!`;
+    levelUpSound.currentTime = 0;
+    levelUpSound.play();
+  } else {
+    resultElement.textContent = 'Correct!';
+  }
+
     nextQuestion();
+
   } else {
     const isGameOver = loseLife();
+    incorrectSound.currentTime = 0;
     incorrectSound.play();
     if (!isGameOver) {
       resultElement.textContent = 'Incorrect!';
@@ -161,8 +195,10 @@ function startGame() {
     numberElement.style.display = 'inline';
     numberContainer.style.display = 'block';
     document.querySelector('.number-container').style.display = 'flex';
-    resultElement.classList.add('result-initial-margin'); // Add initial margin class
-    resultElement.classList.remove('result-extra-margin'); // Remove extra margin class
+    resultElement.classList.add('result-initial-margin');
+    resultElement.classList.remove('result-extra-margin');
+    timerElement.style.color = 'black';
+    secondsText.style.color = 'black';
 
     timeRemaining = 60;
     livesRemaining = 3;
@@ -179,7 +215,7 @@ function startGame() {
     noButton.disabled = false;
 
     clearInterval(timerInterval);
-timerInterval = setInterval(() => {
+    timerInterval = setInterval(() => {
     timeRemaining--;
     timerElement.textContent = timeRemaining;
 
