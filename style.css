@@ -168,7 +168,7 @@ button#start:hover {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: black;
+  background-color: #161616;
   color: white;
   padding: 5px 10px;
   border: none;
